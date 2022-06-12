@@ -12,11 +12,12 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       AutoImport({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [ElementPlusResolver()]
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
-      }),],
+        resolvers: [ElementPlusResolver()]
+      })
+    ],
     resolve: {
       alias: {
         '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录

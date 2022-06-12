@@ -23,8 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     path: '/axios',
     name: 'Axios',
     component: () => import('../views/axios.vue') // 懒加载组件
-  },
-
+  }
 ]
 // console.log(import.meta.env.MODE, 'import.meta.env.MODE')
 const router = createRouter({
