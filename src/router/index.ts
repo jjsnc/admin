@@ -1,8 +1,22 @@
 import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router'
 import Home from '../views/home.vue'
 
-const activeName = import.meta.env.VITE_ACTIVE
+import Layout from '../layout/index.vue'
+
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    component: Layout,
+    redirect: '/dashboard',
+    children: [
+      {
+        path: 'dashboard',
+        component: () => import('../views/dashboard/index.vue'),
+        name: 'Dashboard',
+        meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
+      }
+    ]
+  },
   {
     path: '/',
     name: 'Home',
