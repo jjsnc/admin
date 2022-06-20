@@ -16,11 +16,20 @@ export default defineComponent({
 })
 </script>
 
+
 <template>
-  <div class="parent">
-    <div class="child">home</div>
-    <el-button>I am ElButton</el-button>
+  <div class="common-layout">
+    <el-container>
+      <el-aside width="200px">Aside</el-aside>
+      <el-container>
+        <el-header>Header</el-header>
+        <el-main>Main</el-main>
+        <el-footer>Footer</el-footer>
+      </el-container>
+    </el-container>
   </div>
 </template>
+
+
 
 <style></style>

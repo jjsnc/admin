@@ -1,35 +1,28 @@
 import { createStore } from 'vuex'
+import getters from './getters'
+const modulesFiles =import.meta.globEager("./modules/*.ts") // vite
 
-const defaultState = {
-  count: 0,
-  loading: false
-}
 
-// Create a new store instance.
+let modules:any = {}
+Object.values(modulesFiles).map((v) => {
+  const name = v.default.name
+  modules[name] = v.default
+})
+
+
+
+
 export default createStore({
-  state() {
-    return defaultState
+  modules,
+  getters,
+  state () {
+    return {
+      count: 0
+    }
   },
   mutations: {
-    increment(state: typeof defaultState) {
-      // eslint-disable-next-line no-param-reassign
-      state.count += 1
-    },
-    setLoading(state: typeof defaultState, flag) {
-      state.loading = flag
-    }
-  },
-  actions: {
-    increment(context) {
-      context.commit('increment')
-    }
-  },
-  getters: {
-    increment(state: typeof defaultState) {
-      return state.count * 2
-    },
-    getLoading(state: typeof defaultState) {
-      return state.loading
+    increment (state) {
+      state.count++
     }
   }
 })
