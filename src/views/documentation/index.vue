@@ -2,7 +2,7 @@
 
 <template>
   <div class="parent">
-    <div class="child">blue axios</div>
+    documentation666
   </div>
 </template>
 

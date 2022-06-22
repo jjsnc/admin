@@ -13,3 +13,6 @@ declare module '@vue/runtime-core' {
     $store: Store<State>
   }
 }
+
+
+declare module '@'

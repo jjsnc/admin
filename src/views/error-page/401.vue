@@ -2,7 +2,7 @@
 
 <template>
   <div class="parent">
-    <div class="child">blue axios</div>
+    401
   </div>
 </template>
 

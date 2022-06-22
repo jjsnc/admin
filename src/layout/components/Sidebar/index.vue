@@ -3,7 +3,7 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu>
-         hello world
+        菜单
          <!-- <sidebar-item  ></sidebar-item> -->
         </el-menu>
     </el-scrollbar>
