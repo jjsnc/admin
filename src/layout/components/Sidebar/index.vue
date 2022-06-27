@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ 'has-logo': sidebarLogo }" @click="handleClick">
+  <div :class="{ 'has-logo': sidebarLogo }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu>
@@ -17,6 +17,9 @@ import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 export default defineComponent({
   components: { Logo, SidebarItem },
+    mounted(){
+     console.log(this.permission_routes,'permission_routes')
+  },
   computed: {
     ...mapGetters(['sidebar','permission_routes']),
     showLogo() {
@@ -43,10 +46,6 @@ export default defineComponent({
     }
   },
   methods: {
-    handleClick() {
-      console.log(this.sidebar, 'sidebar')
-      // this.increment()
-    },
     increment() {
       this.$store.commit('increment')
     }

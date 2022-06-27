@@ -10,7 +10,7 @@ Object.values(modulesFiles).map((v) => {
 })
 
 
-
+console.log(modules,'modules')
 
 export default createStore({
   modules,
