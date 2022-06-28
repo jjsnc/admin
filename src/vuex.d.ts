@@ -15,4 +15,4 @@ declare module '@vue/runtime-core' {
 }
 
 
-declare module '@'
+

@@ -13,9 +13,10 @@
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
     "types": ["element-plus/global"],
-    "baseUrl": "src",
+    "baseUrl": "./",
+    "suppressImplicitAnyIndexErrors": true,
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
