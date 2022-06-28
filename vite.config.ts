@@ -1,5 +1,6 @@
 import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
+import { viteMockServe } from 'vite-plugin-mock'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
@@ -10,6 +11,12 @@ export default defineConfig(({ mode }) => {
   const baseURL = loadEnv(mode, __dirname).VITE_BASE_URL
   return {
     plugins: [
+      viteMockServe({
+        mockPath: "./mock/source", // 解析，路径可根据实际变动
+        localEnabled: true ,// 此处可以手动设置为true，也可以根据官方文档格式
+        supportTs: true,
+
+      }),
       vue(),
       AutoImport({
         resolvers: [ElementPlusResolver()]
@@ -17,10 +24,11 @@ export default defineConfig(({ mode }) => {
       Components({
         resolvers: [ElementPlusResolver()]
       })
+
     ],
     resolve: {
       alias: {
-        "@": resolve(__dirname, "src") // 设置 `@` 指向 `src` 目录
+        '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
       }
     },
     server: {
