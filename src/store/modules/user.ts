@@ -1,4 +1,4 @@
 export default {
   namespaced: true,
-  name:'user'
+  name:'user',
 }

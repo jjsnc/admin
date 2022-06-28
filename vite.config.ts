@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
     ],
     resolve: {
       alias: {
-        '@': resolve(__dirname, 'src') // 设置 `@` 指向 `src` 目录
+        "@": resolve(__dirname, "src") // 设置 `@` 指向 `src` 目录
       }
     },
     server: {
