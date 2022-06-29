@@ -2,7 +2,7 @@
  * @param {string} url
  * @returns {Object}
  */
-function param2Obj(url) {
+ function param2Obj(url) {
   const search = decodeURIComponent(url.split('?')[1]).replace(/\+/g, ' ')
   if (!search) {
     return {}
@@ -29,6 +29,7 @@ function param2Obj(url) {
  */
 function deepClone(source) {
   if (!source && typeof source !== 'object') {
+    // @ts-ignore
     throw new Error('error arguments', 'deepClone')
   }
   const targetObj = source.constructor === Array ? [] : {}
@@ -42,7 +43,7 @@ function deepClone(source) {
   return targetObj
 }
 
-module.exports = {
+export {
   param2Obj,
   deepClone
 }

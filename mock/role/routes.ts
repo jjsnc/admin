@@ -524,7 +524,7 @@ const asyncRoutes = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
-module.exports = {
+export  {
   constantRoutes,
   asyncRoutes
 }

@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       viteMockServe({
-        mockPath: "./mock/source", // 解析，路径可根据实际变动
+        mockPath: "./mock/index", // 解析，路径可根据实际变动
         localEnabled: true ,// 此处可以手动设置为true，也可以根据官方文档格式
         supportTs: true,
 
