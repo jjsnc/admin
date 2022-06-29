@@ -4,8 +4,13 @@
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu>
         菜单
-         <!-- <sidebar-item  ></sidebar-item> -->
-        </el-menu>
+        <sidebar-item
+          v-for="route in permission_routes"
+          :key="route.path"
+          :item="route"
+          :base-path="route.path"
+        ></sidebar-item>
+      </el-menu>
     </el-scrollbar>
   </div>
 </template>
@@ -17,11 +22,11 @@ import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 export default defineComponent({
   components: { Logo, SidebarItem },
-    mounted(){
-     console.log(this.permission_routes,'permission_routes')
+  mounted(){
+    console.log(this.permission_routes,'permission_routes')
   },
   computed: {
-    ...mapGetters(['sidebar','permission_routes']),
+    ...mapGetters(['sidebar', 'permission_routes']),
     showLogo() {
       return this.$store.state.settings.sidebarLogo
     },
