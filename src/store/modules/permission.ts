@@ -44,7 +44,6 @@ const mutations = {
     state.routes = constantRoutes.concat(routes)
   }
 }
-
 const actions = {
   // @ts-ignore
   generateRoutes({ commit }, roles) {
