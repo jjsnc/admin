@@ -40,7 +40,7 @@ export const constantRoutes = [
     redirect: '/dashboard',
     children: [
       {
-        path: 'dashboard',
+        path: '/dashboard',
         component: () => import('../views/dashboard/index.vue'),
         name: 'Dashboard',
         meta: { transition: 'slide-right', title: 'Dashboard', icon: 'dashboard', affix: true }
@@ -52,7 +52,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '/documentation/index',
         component: () => import('@/views/documentation/index.vue'),
         name: 'Documentation',
         meta: {
@@ -84,7 +84,7 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: 'page',
+        path: '/page',
         component: () => import('@/views/permission/page.vue'),
         name: 'PagePermission',
         meta: {
@@ -93,7 +93,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'directive',
+        path: '/directive',
         component: () => import('@/views/permission/directive.vue'),
         name: 'DirectivePermission',
         meta: {
@@ -102,7 +102,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: 'role',
+        path: '/role',
         component: () => import('@/views/permission/role.vue'),
         name: 'RolePermission',
         meta: {
@@ -118,7 +118,7 @@ export const asyncRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
+        path: '/icon/index',
         component: () => import('@/views/icons/index.vue'),
         name: 'Icons',
         meta: { title: 'Icons', icon: 'icon', noCache: true }
@@ -136,13 +136,13 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '401',
+        path: '/error/401',
         component: () => import('@/views/error-page/401.vue'),
         name: 'Page401',
         meta: { title: '401', noCache: true }
       },
       {
-        path: '404',
+        path: '/error/404',
         component: () => import('@/views/error-page/404.vue'),
         name: 'Page404',
         meta: { title: '404', noCache: true }

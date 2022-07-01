@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Sidebar,AppMain } from './components'
+import { Sidebar, AppMain } from './components'
 export default defineComponent({
   components: {
     Sidebar,
@@ -20,8 +20,7 @@ export default defineComponent({
 
 
 <style>
-
-a{
+a {
   display: block;
   margin: 16px;
 }

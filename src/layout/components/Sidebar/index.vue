@@ -3,7 +3,6 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu>
-        菜单
         <sidebar-item
           v-for="route in permission_routes"
           :key="route.path"
