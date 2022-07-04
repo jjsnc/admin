@@ -8,9 +8,30 @@
         !item.alwaysShow
       "
     >
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)"> path</app-link>
+      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item
+          :index="resolvePath(onlyOneChild.path)"
+          :class="{ 'submenu-title-noDropdown': !isNest }"
+        >
+          {{ onlyOneChild.meta.title }}
+        </el-menu-item>
+      </app-link>
     </template>
-    <!-- <el-menu-item v-else index="1-4-1">item one</el-menu-item> -->
+    <template v-else>
+      <el-sub-menu :index="resolvePath(item.path)">
+        <template #title>
+          {{ item.meta.title }}
+        </template>
+        <sidebar-item
+          v-for="child in item.children"
+          :key="child.path"
+          :is-nest="true"
+          :item="child"
+          :base-path="resolvePath(child.path)"
+          class="nest-menu"
+        ></sidebar-item>
+      </el-sub-menu>
+    </template>
   </div>
 </template>
 
@@ -21,13 +42,10 @@
 import { defineComponent } from 'vue'
 import { isExternal } from '@/utils/validate'
 import AppLink from './Link.vue'
-
-
 export default defineComponent({
   name: 'SidebarItem',
   components: { AppLink },
   props: {
-    // route object
     item: {
       type: Object,
       required: true
@@ -42,23 +60,9 @@ export default defineComponent({
     }
   },
   data() {
-    // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
-    // TODO: refactor with render function
     return {
       onlyOneChild: {}
     }
-  },
-  mounted() {
-    console.log(
-      !this.item.hidden &&
-        !this.onlyOneChild.children &&
-        !this.item.alwaysShow &&
-        this.onlyOneChild.meta &&
-        this.onlyOneChild,
-      'onlyOneChild'
-    )
-    // console.log( this.hasOneShowingChild(this.item, this.item.children))
-    //  console.log(this.onlyOneChild && this.onlyOneChild.path,'onlyOneChild.path')
   },
   methods: {
     hasOneShowingChild(children = [], parent) {
@@ -79,14 +83,14 @@ export default defineComponent({
 
       // Show parent if there are no child router to display
       if (showingChildren.length === 0) {
-        this.onlyOneChild = { ...parent, path: '', noShowingChildren: true }
+        this.onlyOneChild = { ...parent, noShowingChildren: true }
         return true
       }
 
       return false
     },
+
     resolvePath(routePath) {
-      // console.log(resolve(this.basePath, routePath),'routePath')
       if (isExternal(routePath)) {
         return routePath
       }
