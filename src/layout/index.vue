@@ -7,7 +7,10 @@
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <div class="main-container">
+    <div :class="{ hasTagsView: needTagsView }" class="main-container">
+      <div :class="{ 'fixed-header': fixedHeader }">
+        <nav-bar></nav-bar>
+      </div>
       <app-main></app-main>
     </div>
   </div>
@@ -16,7 +19,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Sidebar, AppMain } from './components'
+import { Sidebar, AppMain, NavBar } from './components'
+
 import { mapState } from 'vuex'
 
 export default defineComponent({
@@ -27,7 +31,8 @@ export default defineComponent({
   },
   components: {
     Sidebar,
-    AppMain
+    AppMain,
+    NavBar
   },
 
   mounted() {
@@ -42,7 +47,11 @@ export default defineComponent({
       // @ts-ignore
       device: (state) => state.app.device,
       // @ts-ignore
-      sidebar: (state) => state.app.sidebar
+      sidebar: (state) => state.app.sidebar,
+      // @ts-ignore
+      needTagsView: (state) => state.settings.tagsView,
+      // @ts-ignore
+      fixedHeader: (state) => state.settings.fixedHeader
     }),
     classObj() {
       return {

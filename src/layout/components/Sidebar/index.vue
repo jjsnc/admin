@@ -6,6 +6,8 @@
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
+        mode="vertical"
+        :collapse="isCollapse"
       >
         <sidebar-item
           v-for="route in permission_routes"
@@ -26,8 +28,8 @@ import Logo from './Logo.vue'
 import variables from '@/styles/variables.module.scss'
 export default defineComponent({
   components: { Logo, SidebarItem },
-  data(){
-   return {variables}
+  data() {
+    return { variables }
   },
   mounted() {
     console.log(this.permission_routes, 'permission_routes')
@@ -49,7 +51,7 @@ export default defineComponent({
       get() {
         return this.$store.state.settings.sidebarLogo
       },
-      set(val) {
+      set(val:any) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'sidebarLogo',
           value: val
