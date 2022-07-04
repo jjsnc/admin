@@ -1,13 +1,15 @@
 
 <template>
-  <div class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <div
       v-if="device === 'mobile' && sidebar.opened"
       class="drawer-bg"
       @click="handleClickOutside"
     />
     <sidebar class="sidebar-container" />
-    <app-main></app-main>
+    <div class="main-container">
+      <app-main></app-main>
+    </div>
   </div>
 </template>
 
@@ -41,7 +43,19 @@ export default defineComponent({
       device: (state) => state.app.device,
       // @ts-ignore
       sidebar: (state) => state.app.sidebar
-    })
+    }),
+    classObj() {
+      return {
+        // @ts-ignore
+        hideSidebar: !this.sidebar.opened,
+        // @ts-ignore
+        openSidebar: this.sidebar.opened,
+        // @ts-ignore
+        withoutAnimation: this.sidebar.withoutAnimation,
+        // @ts-ignore
+        mobile: this.device === 'mobile'
+      }
+    }
   },
   beforeMount() {
     window.addEventListener('resize', this.$_resizeHandler)
@@ -88,6 +102,10 @@ export default defineComponent({
   position: relative;
   height: 100%;
   width: 100%;
+  &.mobile.openSidebar {
+    position: fixed;
+    top: 0;
+  }
 }
 
 .drawer-bg {

@@ -2,7 +2,11 @@
   <div :class="{ 'has-logo': sidebarLogo }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
-      <el-menu>
+      <el-menu
+        :background-color="variables.menuBg"
+        :text-color="variables.menuText"
+        :active-text-color="variables.menuActiveText"
+      >
         <sidebar-item
           v-for="route in permission_routes"
           :key="route.path"
@@ -19,10 +23,14 @@ import { defineComponent } from 'vue'
 import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
+import variables from '@/styles/variables.module.scss'
 export default defineComponent({
   components: { Logo, SidebarItem },
-  mounted(){
-    console.log(this.permission_routes,'permission_routes')
+  data(){
+   return {variables}
+  },
+  mounted() {
+    console.log(this.permission_routes, 'permission_routes')
   },
   computed: {
     ...mapGetters(['sidebar', 'permission_routes']),
