@@ -46,10 +46,9 @@
 import { defineComponent } from 'vue'
 import { isExternal } from '@/utils/validate'
 import AppLink from './Link.vue'
-import { Location } from '@element-plus/icons-vue'
 export default defineComponent({
   name: 'SidebarItem',
-  components: { AppLink, Location },
+  components: { AppLink },
   props: {
     item: {
       type: Object,

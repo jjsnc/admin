@@ -43,7 +43,7 @@ export const constantRoutes = [
         path: '/dashboard',
         component: () => import('../views/dashboard/index.vue'),
         name: 'Dashboard',
-        meta: { transition: 'slide-right', title: 'Dashboard', icon: 'Location', affix: true }
+        meta: { transition: 'slide-right', title: 'Dashboard', icon: 'House', affix: true }
       }
     ]
   },
@@ -58,7 +58,7 @@ export const constantRoutes = [
         meta: {
           transition: 'slide-right',
           title: 'Documentation',
-          icon: 'Location',
+          icon: 'Document',
           affix: true
         }
       }
@@ -79,7 +79,7 @@ export const asyncRoutes = [
     name: 'Permission',
     meta: {
       title: 'Permission',
-      icon: 'Location',
+      icon: 'Goods',
       roles: ['admin', 'editor'] // you can set roles in root nav
     },
     children: [
@@ -122,7 +122,7 @@ export const asyncRoutes = [
         path: '/icon/index',
         component: () => import('@/views/icons/index.vue'),
         name: 'Icons',
-        meta: { title: 'Icons', icon: 'Location', noCache: true }
+        meta: { title: 'Icons', icon: 'InfoFilled', noCache: true }
       }
     ]
   },
@@ -133,7 +133,7 @@ export const asyncRoutes = [
     name: 'ErrorPages',
     meta: {
       title: 'Error Pages',
-      icon: 'Location'
+      icon: 'AddLocation'
     },
     children: [
       {
