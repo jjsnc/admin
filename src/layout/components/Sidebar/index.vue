@@ -3,11 +3,13 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        mode="vertical"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
         :active-text-color="variables.menuActiveText"
-        mode="vertical"
         :collapse="isCollapse"
+        :collapse-transition="false"
+        :unique-opened="false"
       >
         <sidebar-item
           v-for="route in permission_routes"
@@ -51,7 +53,7 @@ export default defineComponent({
       get() {
         return this.$store.state.settings.sidebarLogo
       },
-      set(val:any) {
+      set(val: any) {
         this.$store.dispatch('settings/changeSetting', {
           key: 'sidebarLogo',
           value: val

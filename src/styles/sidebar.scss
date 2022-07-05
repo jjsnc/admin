@@ -1,8 +1,7 @@
 #app {
-
   .main-container {
     min-height: 100%;
-    transition: margin-left .28s;
+    transition: margin-left 0.28s;
     margin-left: $sideBarWidth;
     position: relative;
   }
@@ -33,6 +32,23 @@
       border: none;
       height: 100%;
       width: 100% !important;
+    }
+  }
+  .hideSidebar {
+    .sidebar-container {
+      width: 64px !important;
+    }
+
+    .main-container {
+      margin-left: 64px;
+    }
+    .el-sub-menu {
+      span {
+        display: none;
+      }
+      .el-sub-menu__icon-arrow {
+        display: none;
+      }
     }
   }
   .scrollbar-wrapper {

@@ -9,29 +9,33 @@
       "
     >
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
-        <el-menu-item
-          :index="resolvePath(onlyOneChild.path)"
-          :class="{ 'submenu-title-noDropdown': !isNest }"
-        >
-          {{ onlyOneChild.meta.title }}
+        <el-menu-item :index="resolvePath(onlyOneChild.path)">
+          <el-icon v-if="onlyOneChild.meta.icon">
+            <component :is="onlyOneChild.meta.icon"></component>
+          </el-icon>
+          <template #title
+            ><span>{{ onlyOneChild.meta.title }}</span>
+          </template>
         </el-menu-item>
       </app-link>
     </template>
-    <template v-else>
-      <el-sub-menu :index="resolvePath(item.path)">
-        <template #title>
-          {{ item.meta.title }}
-        </template>
-        <sidebar-item
-          v-for="child in item.children"
-          :key="child.path"
-          :is-nest="true"
-          :item="child"
-          :base-path="resolvePath(child.path)"
-          class="nest-menu"
-        ></sidebar-item>
-      </el-sub-menu>
-    </template>
+
+    <el-sub-menu v-else :index="resolvePath(item.path)"  >
+      <template #title>
+        <el-icon>
+          <component :is="item.meta.icon"></component>
+        </el-icon>
+        <span> {{ item.meta.title }}</span>
+      </template>
+      <sidebar-item
+        v-for="child in item.children"
+        :key="child.path"
+        :is-nest="true"
+        :item="child"
+        :base-path="resolvePath(child.path)"
+        class="nest-menu"
+      ></sidebar-item>
+    </el-sub-menu>
   </div>
 </template>
 
@@ -42,9 +46,10 @@
 import { defineComponent } from 'vue'
 import { isExternal } from '@/utils/validate'
 import AppLink from './Link.vue'
+import { Location } from '@element-plus/icons-vue'
 export default defineComponent({
   name: 'SidebarItem',
-  components: { AppLink },
+  components: { AppLink, Location },
   props: {
     item: {
       type: Object,
