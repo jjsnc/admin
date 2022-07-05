@@ -84,7 +84,7 @@ export const asyncRoutes = [
     },
     children: [
       {
-        path: '/page',
+        path: '/permission/page',
         component: () => import('@/views/permission/page.vue'),
         name: 'PagePermission',
         meta: {
@@ -93,7 +93,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: '/directive',
+        path: '/permission/directive',
         component: () => import('@/views/permission/directive.vue'),
         name: 'DirectivePermission',
         meta: {
@@ -102,7 +102,7 @@ export const asyncRoutes = [
         }
       },
       {
-        path: '/role',
+        path: '/permission/role',
         component: () => import('@/views/permission/role.vue'),
         name: 'RolePermission',
         meta: {
