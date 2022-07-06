@@ -8,6 +8,11 @@
       @toggleClick="toggleSideBar"
     />
     <breadcrumb id="breadcrumb-container" class="breadcrumb-container" />
+    <div class="right-menu">
+      <template v-if="device !== 'mobile'">
+        <search id="header-search" class="right-menu-item" />
+      </template>
+    </div>
   </div>
 </template>
 
@@ -16,15 +21,17 @@
 import { defineComponent } from 'vue'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
+import Search from '@/components/HeaderSearch/index.vue'
 import { mapGetters } from 'vuex'
 export default defineComponent({
   name: 'NavBar',
   components: {
     Hamburger,
-    Breadcrumb
+    Breadcrumb,
+    Search
   },
   computed: {
-    ...mapGetters(['sidebar'])
+    ...mapGetters(['sidebar', 'device'])
   },
   methods: {
     toggleSideBar() {
@@ -57,6 +64,15 @@ export default defineComponent({
   }
   .breadcrumb-container {
     float: left;
+  }
+
+  .right-menu {
+    float: right;
+    height: 100%;
+    line-height: 50px;
+    &:focus {
+      outline: none;
+    }
   }
 }
 </style>
