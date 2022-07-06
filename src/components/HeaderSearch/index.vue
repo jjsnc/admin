@@ -63,7 +63,6 @@ export default defineComponent({
   methods: {
     click() {
       this.show = !this.show
-      console.log(this.show, ' this.show')
       if (this.show) {
         this.$refs.headerSearchSelect && this.$refs.headerSearchSelect.focus()
       }
@@ -129,7 +128,6 @@ export default defineComponent({
     querySearch(query: any) {
       if (query !== '') {
         this.options = this.fuse.search(query)
-        console.log(this.options)
       } else {
         this.options = []
       }
