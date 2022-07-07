@@ -12,6 +12,9 @@
       <template v-if="device !== 'mobile'">
         <search id="header-search" class="right-menu-item" />
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
+        <el-tooltip content="Global Size" effect="dark" placement="bottom">
+          <size-select id="size-select" class="right-menu-item hover-effect" />
+        </el-tooltip>
       </template>
     </div>
   </div>
@@ -24,6 +27,7 @@ import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Search from '@/components/HeaderSearch/index.vue'
 import Screenfull from '@/components/Screenfull/index.vue'
+import SizeSelect from '@/components/SizeSelect/index.vue'
 import { mapGetters } from 'vuex'
 export default defineComponent({
   name: 'NavBar',
@@ -31,7 +35,8 @@ export default defineComponent({
     Hamburger,
     Breadcrumb,
     Search,
-    Screenfull
+    Screenfull,
+    SizeSelect
   },
   computed: {
     ...mapGetters(['sidebar', 'device'])

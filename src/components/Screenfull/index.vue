@@ -1,5 +1,5 @@
 <template>
-  <div @click="click" class="el-icon-warp">
+  <div @click="click">
     <svg
       class="svg-icon"
       viewBox="0 0 128 128"
@@ -57,10 +57,6 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-.el-icon-warp {
-  margin-right: 100px;
-}
-
 .svg-icon {
   width: 1em;
   height: 1em;

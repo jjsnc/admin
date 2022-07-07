@@ -2,7 +2,7 @@
   <section class="app-main">
     <router-view v-slot="{ Component }">
       <transition name="fade-transform" mode="out-in">
-        <keep-alive>
+        <keep-alive :include="cachedViews">
           <component :is="Component" />
         </keep-alive>
       </transition>
@@ -15,6 +15,12 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'AppMain'
+  name: 'AppMain',
+  computed: {
+    cachedViews() {
+      // @ts-ignore
+      return this.$store.state.tagsView.cachedViews
+    }
+  }
 })
 </script>
