@@ -16,6 +16,32 @@
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
+      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
+        <div class="avatar-wrapper">
+          <img :src="avatar + '?imageView2/1/w/80/h/80'" class="user-avatar" />
+
+          <el-icon class="el-icon-caret-bottom"> <CaretBottom></CaretBottom></el-icon>
+        </div>
+        <template #dropdown>
+          <el-dropdown-menu>
+            <router-link to="/icon/index">
+              <el-dropdown-item>icon</el-dropdown-item>
+            </router-link>
+            <router-link to="/dashboard">
+              <el-dropdown-item>Dashboard</el-dropdown-item>
+            </router-link>
+            <a target="_blank" href="https://github.com/jjsnc/admin">
+              <el-dropdown-item>Github</el-dropdown-item>
+            </a>
+            <a target="_blank" href="https://element-plus.gitee.io/zh-CN/">
+              <el-dropdown-item>Docs</el-dropdown-item>
+            </a>
+            <el-dropdown-item divided @click.native="logout">
+              <span style="display: block">Log Out</span>
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </template>
+      </el-dropdown>
     </div>
   </div>
 </template>
@@ -39,12 +65,13 @@ export default defineComponent({
     SizeSelect
   },
   computed: {
-    ...mapGetters(['sidebar', 'device'])
+    ...mapGetters(['sidebar', 'device', 'avatar'])
   },
   methods: {
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
-    }
+    },
+    logout() {}
   }
 })
 </script>
@@ -93,6 +120,29 @@ export default defineComponent({
         transition: all 0.3s;
         &:hover {
           background: rgba(0, 0, 0, 0.025);
+        }
+      }
+    }
+    .avatar-container {
+      margin-right: 30px;
+
+      .avatar-wrapper {
+        margin-top: 5px;
+        position: relative;
+
+        .user-avatar {
+          cursor: pointer;
+          width: 40px;
+          height: 40px;
+          border-radius: 10px;
+        }
+
+        .el-icon-caret-bottom {
+          cursor: pointer;
+          position: absolute;
+          right: -20px;
+          top: 25px;
+          font-size: 12px;
         }
       }
     }

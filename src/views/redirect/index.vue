@@ -7,7 +7,7 @@
 <style></style>
 
 <script lang="ts">
-import { defineComponent, h } from 'vue'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   created() {
