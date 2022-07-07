@@ -11,6 +11,7 @@
     <div class="right-menu">
       <template v-if="device !== 'mobile'">
         <search id="header-search" class="right-menu-item" />
+        <screenfull id="screenfull" class="right-menu-item hover-effect" />
       </template>
     </div>
   </div>
@@ -22,13 +23,15 @@ import { defineComponent } from 'vue'
 import Hamburger from '@/components/Hamburger/index.vue'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Search from '@/components/HeaderSearch/index.vue'
+import Screenfull from '@/components/Screenfull/index.vue'
 import { mapGetters } from 'vuex'
 export default defineComponent({
   name: 'NavBar',
   components: {
     Hamburger,
     Breadcrumb,
-    Search
+    Search,
+    Screenfull
   },
   computed: {
     ...mapGetters(['sidebar', 'device'])
@@ -72,6 +75,21 @@ export default defineComponent({
     line-height: 50px;
     &:focus {
       outline: none;
+    }
+    .right-menu-item {
+      display: inline-block;
+      padding: 0 8px;
+      height: 100%;
+      font-size: 18px;
+      color: #5a5e66;
+      vertical-align: text-bottom;
+      &.hover-effect {
+        cursor: pointer;
+        transition: all 0.3s;
+        &:hover {
+          background: rgba(0, 0, 0, 0.025);
+        }
+      }
     }
   }
 }
