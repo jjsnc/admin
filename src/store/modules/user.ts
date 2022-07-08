@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { login, logout, getInfo } from '@/api/user'
 
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -49,8 +48,10 @@ let actions = {
     })
   },
   // user logout
+  // @ts-ignore
   logout({ commit, state, dispatch }) {
     return new Promise((resolve, reject) => {
+      // @ts-ignore
       logout(state.token)
         .then(() => {
           commit('SET_TOKEN', '')
@@ -60,7 +61,7 @@ let actions = {
           // reset visited views and cached views
           // to fixed https://github.com/PanJiaChen/vue-element-admin/issues/2485
           dispatch('tagsView/delAllViews', null, { root: true })
-
+          // @ts-ignore
           resolve()
         })
         .catch((error) => {
