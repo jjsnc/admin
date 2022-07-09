@@ -1,4 +1,3 @@
-
 <template>
   <div class="navbar">
     <hamburger
@@ -36,7 +35,7 @@
             <a target="_blank" href="https://element-plus.gitee.io/zh-CN/">
               <el-dropdown-item>Docs</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click.native="logout">
+            <el-dropdown-item divided @click="logout">
               <span style="display: block">Log Out</span>
             </el-dropdown-item>
           </el-dropdown-menu>
@@ -45,7 +44,6 @@
     </div>
   </div>
 </template>
-
 
 <script lang="ts">
 import { defineComponent } from 'vue'
@@ -78,8 +76,6 @@ export default defineComponent({
   }
 })
 </script>
-
-
 
 <style lang="scss" scoped>
 .navbar {
@@ -152,4 +148,3 @@ export default defineComponent({
   }
 }
 </style>
-

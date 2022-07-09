@@ -1,4 +1,3 @@
-
 <template>
   <div :class="classObj" class="app-wrapper">
     <div
@@ -10,16 +9,16 @@
     <div :class="{ hasTagsView: needTagsView }" class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
         <nav-bar></nav-bar>
+        <tags-view />
       </div>
       <app-main></app-main>
     </div>
   </div>
 </template>
 
-
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { Sidebar, AppMain, NavBar } from './components'
+import { Sidebar, AppMain, NavBar, TagsView } from './components'
 
 import { mapState } from 'vuex'
 
@@ -32,7 +31,8 @@ export default defineComponent({
   components: {
     Sidebar,
     AppMain,
-    NavBar
+    NavBar,
+    TagsView
   },
 
   mounted() {
@@ -102,8 +102,6 @@ export default defineComponent({
 })
 </script>
 
-
-
 <style lang="scss" scoped>
 @import '@/styles/mixin.scss';
 .app-wrapper {
@@ -127,4 +125,3 @@ export default defineComponent({
   z-index: 999;
 }
 </style>
-
