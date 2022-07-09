@@ -2,7 +2,6 @@
   <div :class="{ 'has-logo': sidebarLogo }">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
-
       <el-menu
         mode="vertical"
         :default-active="activeMenu"
@@ -35,9 +34,6 @@ export default defineComponent({
   components: { Logo, SidebarItem },
   data() {
     return { variables }
-  },
-  mounted() {
-    console.log(this.permission_routes, 'permission_routes')
   },
   computed: {
     ...mapGetters(['sidebar', 'permission_routes']),
