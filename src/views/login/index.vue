@@ -11,8 +11,40 @@
     </div>
     <div class="main">
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
-        <el-tab-pane label="User" name="first">User</el-tab-pane>
-        <el-tab-pane label="Config" name="second">Config</el-tab-pane>
+        <el-tab-pane label="二维码登录" name="first">二维码登录</el-tab-pane>
+        <el-tab-pane label="账户密码登录" name="second">
+          <el-form :model="form">
+            <el-form-item>
+              <el-input
+                v-model="form.username"
+                placeholder="用户名"
+                type="text"
+                tabindex="1"
+                autocomplete="on"
+              />
+            </el-form-item>
+            <el-form-item>
+              <el-input
+                v-model="form.password"
+                type="password"
+                placeholder="密码"
+                tabindex="2"
+                autocomplete="on"
+                show-password
+                @keyup.enter.native="handleLogin"
+              />
+            </el-form-item>
+            <el-form-item>
+              <el-row>
+                <el-col :span="15"
+                  ><div class="grid-content ep-bg-purple" />
+                  <el-input class="w-50 m-2" v-model="form.code" placeholder="Approved by" />
+                </el-col>
+                <el-col :span="7"> 123123 </el-col>
+              </el-row>
+            </el-form-item>
+          </el-form>
+        </el-tab-pane>
       </el-tabs>
     </div>
     <div class="footer"></div>
@@ -24,12 +56,18 @@ import type { TabsPaneContext } from 'element-plus'
 export default defineComponent({
   data() {
     return {
-      activeName: 'first'
+      activeName: 'first',
+      form: {
+        username: '',
+        password: '',
+        code: ''
+      }
     }
   },
   methods: {
-    handleClick(tab: TabsPaneContext, event: Event) {
-      console.log(tab, event)
+    handleClick(tab: TabsPaneContext, event: Event) {},
+    handleLogin() {
+      console.log(this.form, '12313')
     }
   }
 })
@@ -39,13 +77,13 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .login-page {
-  text-align: center;
   background: url('https://gw.alipayobjects.com/zos/rmsportal/TVYTbAXWheQpRcWDaDMu.svg');
   background-repeat: no-repeat;
   background-position: center 110px;
   background-size: 100%;
   min-height: 100vh;
   .header {
+    text-align: center;
     padding-top: 72px;
     .title {
       display: flex;
@@ -69,8 +107,16 @@ export default defineComponent({
     }
   }
   .main {
-    width: 400px;
+    width: 368px;
     margin: 0 auto;
+    &:deep(.el-tabs__nav-wrap) {
+      &::after {
+        display: none;
+      }
+    }
+    .el-row {
+      width: 100%;
+    }
   }
   .footer {
   }
