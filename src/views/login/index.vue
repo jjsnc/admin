@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="login-page">
     <div class="header">
@@ -13,7 +11,7 @@
       <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
         <el-tab-pane label="二维码登录" name="first">二维码登录</el-tab-pane>
         <el-tab-pane label="账户密码登录" name="second">
-          <el-form :model="form">
+          <el-form :model="form" size="large">
             <el-form-item>
               <el-input
                 v-model="form.username"
@@ -31,17 +29,28 @@
                 tabindex="2"
                 autocomplete="on"
                 show-password
-                @keyup.enter.native="handleLogin"
+                @keyup.enter="handleLogin"
               />
             </el-form-item>
             <el-form-item>
-              <el-row>
+              <el-row :gutter="16">
                 <el-col :span="15"
                   ><div class="grid-content ep-bg-purple" />
-                  <el-input class="w-50 m-2" v-model="form.code" placeholder="Approved by" />
+                  <el-input class="w-50 m-2" v-model="form.code" placeholder="验证码" />
                 </el-col>
-                <el-col :span="7"> 123123 </el-col>
+                <el-col :span="7">
+                  <img
+                    @click="handleCode"
+                    class="code-img"
+                    :src="'data:image/png;base64,' + captcha"
+                  />
+                </el-col>
               </el-row>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary" :loading="loading" class="submit-btn" @click="handleLogin">
+                登录</el-button
+              >
             </el-form-item>
           </el-form>
         </el-tab-pane>
@@ -53,27 +62,50 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
+import { httpCode, httpLogin } from '@/api/user'
 export default defineComponent({
   data() {
     return {
-      activeName: 'first',
+      activeName: '',
+      loading: false,
+      captcha: '',
       form: {
         username: '',
         password: '',
-        code: ''
+        code: '',
+        codeKey: ''
       }
     }
   },
+  mounted() {
+    this.handleCode()
+  },
   methods: {
     handleClick(tab: TabsPaneContext, event: Event) {},
-    handleLogin() {
-      console.log(this.form, '12313')
+    async handleLogin() {
+      let { username, password, code,codeKey } = this.form
+      let parents = {
+        env: 'TEST',
+        username,
+        password,
+        captcha: code,
+        codeKey,
+        loginMode: 'ACCOUNT',
+        appCode: 'runaway'
+      }
+      let result = await httpLogin(parents)
+    },
+
+    async handleCode() {
+      let result = await httpCode()
+      console.log(result)
+      let { captcha, codeKey } = result.data
+      this.captcha = captcha
+      this.form.codeKey = codeKey
     }
   }
 })
 </script>
-
-
 
 <style lang="scss" scoped>
 .login-page {
@@ -117,10 +149,15 @@ export default defineComponent({
     .el-row {
       width: 100%;
     }
+    .code-img {
+      height: 38px;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      width: 100%;
+    }
   }
   .footer {
   }
 }
 </style>
-
-

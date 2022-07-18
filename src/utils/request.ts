@@ -4,7 +4,7 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 import store from '@/store/index'
 import { getToken } from '@/utils/auth'
 // const baseURL = '/dev-api'
-const baseURL = ''
+const baseURL = 'http://backend.testc.northlife.com.cn'
 const service = axios.create({
   baseURL: baseURL,
   timeout: 5000 // request timeout
@@ -35,7 +35,7 @@ service.interceptors.response.use(
      * 根据你的项目实际情况来对 response 和 error 做处理
      * 这里对 response 和 error 不做任何处理，直接返回
      */
-    if (res.code !== 20000) {
+    if (res.code !== '1') {
       ElMessage({
         message: res.message || 'Error',
         type: 'error',

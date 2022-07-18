@@ -1,6 +1,17 @@
 import request from '@/utils/request'
 
-export function login(data:any) {
+interface Params {
+  id?: string
+  env?: string
+  username?: string
+  password?: string
+  captcha?: string
+  codeKey?: string
+  loginMode?: string
+  appCode?: string
+}
+
+export function login(data: any) {
   return request({
     url: '/vue-element-admin/user/login',
     method: 'post',
@@ -8,7 +19,7 @@ export function login(data:any) {
   })
 }
 
-export function getInfo(token:any) {
+export function getInfo(token: any) {
   return request({
     url: '/vue-element-admin/user/info',
     method: 'get',
@@ -22,3 +33,25 @@ export function logout() {
     method: 'post'
   })
 }
+
+
+
+export function httpCode() {
+  return request({
+    url: '/backend/ops/captcha/145/40',
+    method: 'post'
+  })
+}
+
+
+export function httpLogin(params: Params) {
+  return request({
+    url: '/ops/login',
+    method: 'post',
+    data: params
+  })
+}
+
+
+
+
