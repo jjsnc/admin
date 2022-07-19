@@ -10,17 +10,6 @@ interface Params {
   appCode?: string
 }
 
-interface Params {
-  id?: string
-  env?: string
-  username?: string
-  password?: string
-  captcha?: string
-  codeKey?: string
-  loginMode?: string
-  appCode?: string
-}
-
 export function login(data: any) {
   return request({
     url: '/vue-element-admin/user/login',
