@@ -3,6 +3,7 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
+        v-if="permission_routes.length > 0"
         mode="vertical"
         :default-active="activeMenu"
         :background-color="variables.menuBg"
@@ -30,16 +31,17 @@ import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 import variables from '@/styles/variables.module.scss'
+import { getRoutes } from '@/utils/auth'
 export default defineComponent({
   components: { Logo, SidebarItem },
   data() {
     return { variables }
   },
-  mounted() {
-    console.log(this.permission_routes, 'permission_routes')
+  created() {
+    this.handleRoutes()
   },
   computed: {
-    ...mapGetters(['sidebar', 'permission_routes']),
+    ...mapGetters(['sidebar']),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -73,6 +75,9 @@ export default defineComponent({
     }
   },
   methods: {
+    handleRoutes() {
+      this.permission_routes = JSON.parse(getRoutes())
+    },
     increment() {
       this.$store.commit('increment')
     }

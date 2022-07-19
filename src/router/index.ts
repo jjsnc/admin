@@ -25,22 +25,12 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/404',
-    component: () => import('@/views/error-page/404.vue'),
-    hidden: true
-  },
-  {
-    path: '/401',
-    component: () => import('@/views/error-page/401.vue'),
-    hidden: true
-  },
-  {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/member',
     children: [
       {
-        path: '/dashboard',
+        path: '/member',
         component: () => import('../views/dashboard/index.vue'),
         name: 'Dashboard',
         meta: { transition: 'slide-right', title: 'Dashboard', icon: 'House', affix: true }

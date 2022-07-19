@@ -1,6 +1,6 @@
 // @ts-nocheck
-import { constantRoutes } from '@/router'
-
+import { setRoutes } from '@/utils/auth'
+import Layout from '@/layout/index.vue'
 let state = {
   routes: [],
   addRoutes: []
@@ -8,19 +8,26 @@ let state = {
 const mutations = {
   SET_ROUTES: (state: any, routes: any) => {
     state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
+    setRoutes(JSON.stringify(routes))
+    state.routes = routes
   }
 }
 
 export function filterAsyncRoutes(routes) {
   const res = []
-
   routes.forEach((route) => {
-    const tmp = { ...route }
-    if (tmp.children) {
-      tmp.children = filterAsyncRoutes(tmp.children)
+    tmp = {}
+    if (route.type === 1) {
+      if (route.children.length > 0) {
+        tmp = { ...route, component: Layout }
+      } else {
+        tmp = { ...route }
+      }
+      if (tmp.children) {
+        tmp.children = filterAsyncRoutes(tmp.children)
+      }
+      res.push(tmp)
     }
-    res.push(tmp)
   })
 
   return res
@@ -31,7 +38,8 @@ const actions = {
   generateRoutes({ commit }, permissions) {
     return new Promise((resolve) => {
       let accessedRoutes = filterAsyncRoutes(permissions)
-      console.log(accessedRoutes, '312321')
+      accessedRoutes = accessedRoutes
+
       commit('SET_ROUTES', accessedRoutes)
       resolve(accessedRoutes)
     })

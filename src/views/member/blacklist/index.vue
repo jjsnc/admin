@@ -1,8 +1,7 @@
 
-
 <template>
   <div class="parent">
-    <div class="child">blue axios</div>
+    <div class="child">blackList</div>
   </div>
 </template>
 

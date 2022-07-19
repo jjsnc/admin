@@ -26,22 +26,19 @@
 // @ts-nocheck
 import Fuse from 'fuse.js'
 import { defineComponent } from 'vue'
-
+import { getRoutes } from '@/utils/auth'
 export default defineComponent({
   data() {
     return {
       search: '',
       options: [],
       searchPool: [],
+      routes: [],
       show: false,
       fuse: undefined
     }
   },
-  computed: {
-    routes() {
-      return this.$store.getters.permission_routes
-    }
-  },
+
   watch: {
     routes() {
       this.searchPool = this.generateRoutes(this.routes)
@@ -58,6 +55,7 @@ export default defineComponent({
     }
   },
   mounted() {
+    this.routes = JSON.parse(getRoutes())
     this.searchPool = this.generateRoutes(this.routes)
   },
   methods: {

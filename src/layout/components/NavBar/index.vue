@@ -26,9 +26,7 @@
             <router-link to="/icon/index">
               <el-dropdown-item>icon</el-dropdown-item>
             </router-link>
-            <router-link to="/dashboard">
-              <el-dropdown-item>Dashboard</el-dropdown-item>
-            </router-link>
+
             <a target="_blank" href="https://github.com/jjsnc/admin">
               <el-dropdown-item>Github</el-dropdown-item>
             </a>
