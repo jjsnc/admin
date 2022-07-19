@@ -25,22 +25,8 @@ router.beforeEach(async (to, from, next) => {
       next({ path: '/' })
       NProgress.done()
     } else {
-      const hasRoles = store.getters.roles && store.getters.roles.length > 0
-      if (hasRoles) {
-        next()
-      } else {
-        try {
-          const { roles } = await store.dispatch('user/getInfo')
-          const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
-          router.addRoute(accessRoutes)
-          next({ ...to, replace: true })
-        } catch (error) {
-          await store.dispatch('user/resetToken')
-          ElMessage.error(error || 'Has Error')
-          next(`/login?redirect=${to.path}`)
-          NProgress.done()
-        }
-      }
+      next()
+      NProgress.done()
     }
   } else {
     if (whiteList.includes(to.path)) {
