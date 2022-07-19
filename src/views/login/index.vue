@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="login-page">
     <div class="header">
@@ -31,7 +29,7 @@
                 tabindex="2"
                 autocomplete="on"
                 show-password
-                @keyup.enter.native="handleLogin"
+                @keyup.enter="handleLogin"
               />
             </el-form-item>
             <el-form-item>
@@ -64,7 +62,7 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
-import { getCode, getLogin } from '@/api/user'
+import { httpCode, httpLogin } from '@/api/user'
 import store from '@/store'
 import router from '@/router'
 export default defineComponent({
@@ -86,7 +84,7 @@ export default defineComponent({
   methods: {
     handleClick(tab: TabsPaneContext, event: Event) {},
     async handleCode() {
-      let result = await getCode()
+      let result = await httpCode()
       let { codeKey, captcha } = result.data
       this.form.codeKey = codeKey
       this.captcha = captcha
@@ -102,7 +100,7 @@ export default defineComponent({
         loginMode: 'ACCOUNT',
         appCode: 'runaway'
       }
-      let result = await getLogin(params)
+      let result = await httpLogin(params)
     },
     async handleRouters() {
       const { roles } = await store.dispatch('user/getInfo')
@@ -112,8 +110,6 @@ export default defineComponent({
   }
 })
 </script>
-
-
 
 <style lang="scss" scoped>
 .login-page {
@@ -164,10 +160,15 @@ export default defineComponent({
     .submit-btn {
       width: 100%;
     }
+    .code-img {
+      height: 38px;
+      border-radius: 5px;
+    }
+    .submit-btn {
+      width: 100%;
+    }
   }
   .footer {
   }
 }
 </style>
-
-

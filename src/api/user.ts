@@ -10,6 +10,17 @@ interface Params {
   appCode?: string
 }
 
+interface Params {
+  id?: string
+  env?: string
+  username?: string
+  password?: string
+  captcha?: string
+  codeKey?: string
+  loginMode?: string
+  appCode?: string
+}
+
 export function login(data: any) {
   return request({
     url: '/vue-element-admin/user/login',
@@ -33,14 +44,14 @@ export function logout() {
   })
 }
 
-export function getCode() {
+export function httpCode() {
   return request({
     url: '/backend/ops/captcha/145/40',
     method: 'post'
   })
 }
 
-export function getLogin(params: Params) {
+export function httpLogin(params: Params) {
   return request({
     url: '/ops/login',
     method: 'post',

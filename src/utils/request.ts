@@ -4,8 +4,7 @@ import { ElMessageBox, ElMessage } from 'element-plus'
 import store from '@/store/index'
 import { getToken } from '@/utils/auth'
 // const baseURL = '/dev-api'
-const baseURL = 'http://backend.uatc.northlife.com.cn'
-
+const baseURL = 'http://backend.testc.northlife.com.cn'
 const service = axios.create({
   baseURL: baseURL,
   timeout: 5000 // request timeout
