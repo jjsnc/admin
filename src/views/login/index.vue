@@ -105,13 +105,13 @@ export default defineComponent({
       let result = await httpLogin(params)
       this.loading = false
       let { permissions, token, user } = result.data
-      this.handleRouters(permissions)
+      this.handleMenus(permissions)
       this.handleUser(user)
       this.handleToken(token)
       this.$router.push({ path: '/' })
     },
-    async handleRouters(permissions: any) {
-      const accessRoutes = await store.dispatch('permission/generateRoutes', permissions[0].menuVo)
+    async handleMenus(permissions: any) {
+      const accessRoutes = await store.dispatch('permission/generateMenus', permissions[0].menuVo)
       router.addRoute(accessRoutes)
     },
     async handleUser(user: any) {

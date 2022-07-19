@@ -1,4 +1,4 @@
-<template >
+<template>
   <div :class="{ show: show }" class="header-search">
     <el-icon class="search-icon" :size="18" @click.stop="click"> <Search /> </el-icon>
     <el-select
@@ -38,13 +38,13 @@ export default defineComponent({
     }
   },
   computed: {
-    routes() {
-      return this.$store.getters.permission_routes
+    menus() {
+      return this.$store.getters.permission_menus
     }
   },
   watch: {
-    routes() {
-      this.searchPool = this.generateRoutes(this.routes)
+    menus() {
+      this.searchPool = this.generateMenus(this.menus)
     },
     searchPool(list) {
       this.initFuse(list)
@@ -58,7 +58,7 @@ export default defineComponent({
     }
   },
   mounted() {
-    this.searchPool = this.generateRoutes(this.routes)
+    this.searchPool = this.generateMenus(this.menus)
   },
   methods: {
     click() {
@@ -100,26 +100,26 @@ export default defineComponent({
         ]
       })
     },
-    generateRoutes(routes, prefixTitle = []) {
+    generateMenus(menus, prefixTitle = []) {
       let res = []
-      for (const router of routes) {
-        if (router.hidden) {
+      for (const menu of menus) {
+        if (menu.hidden) {
           continue
         }
         const data = {
-          path: router.path,
-          title: [...prefixTitle]
+          path: menu.path,
+          name: [...prefixTitle]
         }
-        if (router.meta && router.meta.title) {
-          data.title = [...data.title, router.meta.title]
-          if (router.redirect !== 'noRedirect') {
+        if (menu.name) {
+          data.name = [...data.name, menu.name]
+          if (menu.redirect !== 'noRedirect') {
             res.push(data)
           }
         }
-        if (router.children) {
-          const tempRoutes = this.generateRoutes(router.children, data.title)
-          if (tempRoutes.length >= 1) {
-            res = [...res, ...tempRoutes]
+        if (menu.children) {
+          const tempMenus = this.generateMenus(menu.children, data.name)
+          if (tempMenus.length >= 1) {
+            res = [...res, ...tempMenus]
           }
         }
       }
@@ -135,7 +135,6 @@ export default defineComponent({
   }
 })
 </script>
-
 
 <style lang="scss" scoped>
 .header-search {

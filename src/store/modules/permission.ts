@@ -1,26 +1,25 @@
 // @ts-nocheck
 import { constantRoutes } from '@/router'
-
+import { setMenus } from '@/utils/auth'
 let state = {
-  routes: [],
-  addRoutes: []
+  permission_menus: []
 }
 const mutations = {
-  SET_ROUTES: (state: any, routes: any) => {
-    state.addRoutes = routes
-    state.routes = constantRoutes.concat(routes)
+  SET_MENUS: (state: any, permission_menus: any) => {
+    state.permission_menus = permission_menus.concat(permission_menus)
   }
 }
 
-export function filterAsyncRoutes(routes) {
+export function filterAsyncMenus(routes) {
   const res = []
-
   routes.forEach((route) => {
-    const tmp = { ...route }
-    if (tmp.children) {
-      tmp.children = filterAsyncRoutes(tmp.children)
+    if (route.type === 1) {
+      const tmp = { ...route }
+      if (tmp.children) {
+        tmp.children = filterAsyncMenus(tmp.children)
+      }
+      res.push(tmp)
     }
-    res.push(tmp)
   })
 
   return res
@@ -28,12 +27,13 @@ export function filterAsyncRoutes(routes) {
 
 const actions = {
   // @ts-ignore
-  generateRoutes({ commit }, permissions) {
+  generateMenus({ commit }, permission_menus) {
+
     return new Promise((resolve) => {
-      let accessedRoutes = filterAsyncRoutes(permissions)
-      console.log(accessedRoutes, '312321')
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      let accessedMenus = filterAsyncMenus(permission_menus)
+      setMenus(JSON.stringify(accessedMenus))
+      commit('SET_MENUS', accessedMenus)
+      resolve(accessedMenus)
     })
   }
 }

@@ -13,7 +13,7 @@
         :unique-opened="false"
       >
         <sidebar-item
-          v-for="route in permission_routes"
+          v-for="route in permission_menus"
           :key="route.path"
           :item="route"
           :base-path="route.path"
@@ -30,16 +30,18 @@ import { mapGetters } from 'vuex'
 import SidebarItem from './SidebarItem.vue'
 import Logo from './Logo.vue'
 import variables from '@/styles/variables.module.scss'
+import { getMenus } from '@/utils/auth'
+import store from '@/store'
 export default defineComponent({
   components: { Logo, SidebarItem },
   data() {
     return { variables }
   },
   mounted() {
-    console.log(this.permission_routes, 'permission_routes')
+    this.handlePermissionMenus()
   },
   computed: {
-    ...mapGetters(['sidebar', 'permission_routes']),
+    ...mapGetters(['sidebar', 'permission_menus']),
     activeMenu() {
       const route = this.$route
       const { meta, path } = route
@@ -73,6 +75,14 @@ export default defineComponent({
     }
   },
   methods: {
+    handlePermissionMenus() {
+      let { permission_menus } = this
+      if (permission_menus.length < 0) {
+        return
+      } else {
+        store.dispatch('permission/generateMenus', JSON.parse(getMenus()))
+      }
+    },
     increment() {
       this.$store.commit('increment')
     }
