@@ -35,6 +35,9 @@ export default defineComponent({
   data() {
     return { variables }
   },
+  mounted() {
+    console.log(this.permission_routes, 'permission_routes')
+  },
   computed: {
     ...mapGetters(['sidebar', 'permission_routes']),
     activeMenu() {

@@ -66,95 +66,9 @@ export const constantRoutes = [
   }
 ]
 
-/**
- * asyncRoutes
- * the routes that need to be dynamically loaded based on user roles
- */
-export const asyncRoutes = [
-  {
-    path: '/permission',
-    component: Layout,
-    redirect: '/permission/page',
-    alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      icon: 'Goods',
-      roles: ['admin', 'editor'] // you can set roles in root nav
-    },
-    children: [
-      {
-        path: '/permission/page',
-        component: () => import('@/views/permission/page.vue'),
-        name: 'PagePermission',
-        meta: {
-          title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
-        }
-      },
-      {
-        path: '/permission/directive',
-        component: () => import('@/views/permission/directive.vue'),
-        name: 'DirectivePermission',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: '/permission/role',
-        component: () => import('@/views/permission/role.vue'),
-        name: 'RolePermission',
-        meta: {
-          title: 'Role Permission',
-          roles: ['admin']
-        }
-      }
-    ]
-  },
-
-  {
-    path: '/icon',
-    component: Layout,
-    meta: { icon: 'Location' },
-    children: [
-      {
-        path: '/icon/index',
-        component: () => import('@/views/icons/index.vue'),
-        name: 'Icons',
-        meta: { title: 'Icons', icon: 'InfoFilled', noCache: true }
-      }
-    ]
-  },
-  {
-    path: '/error',
-    component: Layout,
-    redirect: 'noRedirect',
-    name: 'ErrorPages',
-    meta: {
-      title: 'Error Pages',
-      icon: 'AddLocation'
-    },
-    children: [
-      {
-        path: '/error/401',
-        component: () => import('@/views/error-page/401.vue'),
-        name: 'Page401',
-        meta: { title: '401', noCache: true }
-      },
-      {
-        path: '/error/404',
-        component: () => import('@/views/error-page/404.vue'),
-        name: 'Page404',
-        meta: { title: '404', noCache: true }
-      }
-    ]
-  }
-]
-
 const routes: Array<RouteRecordRaw> = [
   ...constantRoutes,
-  ...asyncRoutes,
+
   {
     path: '/axios',
     name: 'Axios',

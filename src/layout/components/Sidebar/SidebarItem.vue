@@ -8,24 +8,24 @@
         !item.alwaysShow
       "
     >
-      <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
+      <app-link :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)">
-          <el-icon v-if="onlyOneChild.meta.icon">
-            <component :is="onlyOneChild.meta.icon"></component>
+          <el-icon v-if="onlyOneChild.icon">
+            <component :is="onlyOneChild.icon"></component>
           </el-icon>
           <template #title
-            ><span>{{ onlyOneChild.meta.title }}</span>
+            ><span>{{ onlyOneChild.name }}</span>
           </template>
         </el-menu-item>
       </app-link>
     </template>
 
-    <el-sub-menu v-else :index="resolvePath(item.path)"  >
+    <el-sub-menu v-else :index="resolvePath(item.path)">
       <template #title>
-        <el-icon>
-          <component :is="item.meta.icon"></component>
+        <el-icon v-if="item.icon">
+          <component v-if="item.icon" :is="item.icon"></component>
         </el-icon>
-        <span> {{ item.meta.title }}</span>
+        <span> {{ item.name }}</span>
       </template>
       <sidebar-item
         v-for="child in item.children"

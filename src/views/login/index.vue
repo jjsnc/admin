@@ -68,6 +68,7 @@ import router from '@/router'
 export default defineComponent({
   data() {
     return {
+      loading: false,
       activeName: 'first',
       captcha: '',
       form: {
@@ -90,6 +91,7 @@ export default defineComponent({
       this.captcha = captcha
     },
     async handleLogin() {
+      this.loading = true
       let { username, password, codeKey, code } = this.form
       let params = {
         username,
@@ -101,11 +103,22 @@ export default defineComponent({
         appCode: 'runaway'
       }
       let result = await httpLogin(params)
+      this.loading = false
+      let { permissions, token, user } = result.data
+      this.handleRouters(permissions)
+      this.handleUser(user)
+      this.handleToken(token)
+      this.$router.push({ path: '/' })
     },
-    async handleRouters() {
-      const { roles } = await store.dispatch('user/getInfo')
-      const accessRoutes = await store.dispatch('permission/generateRoutes', roles)
+    async handleRouters(permissions: any) {
+      const accessRoutes = await store.dispatch('permission/generateRoutes', permissions[0].menuVo)
       router.addRoute(accessRoutes)
+    },
+    async handleUser(user: any) {
+      store.dispatch('user/setUser', user)
+    },
+    async handleToken(token: any) {
+      store.dispatch('user/setToken', token)
     }
   }
 })

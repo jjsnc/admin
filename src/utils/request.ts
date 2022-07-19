@@ -35,10 +35,9 @@ service.interceptors.response.use(
      * 根据你的项目实际情况来对 response 和 error 做处理
      * 这里对 response 和 error 不做任何处理，直接返回
      */
-    console.log(typeof res.code)
     if (res.code !== 20000 && res.code !== '1') {
       ElMessage({
-        message: res.message || 'Error',
+        message: res.desc || 'Error',
         type: 'error',
         duration: 5 * 1000
       })
@@ -58,15 +57,16 @@ service.interceptors.response.use(
             location.reload()
           })
         })
-        return Promise.reject(new Error(res.message || 'Error'))
+        return Promise.reject(new Error(res.desc || 'Error'))
       }
     } else {
       return res
     }
   },
   (error) => {
+    console.log(error, 111)
     ElMessage({
-      message: error.message,
+      message: error.desc,
       type: 'error',
       duration: 5 * 1000
     })
