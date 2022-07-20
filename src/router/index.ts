@@ -12,6 +12,7 @@ export const constantRoutes = [
     path: '/',
     component: Layout,
     redirect: '/dashboard',
+    icon: 'House',
     children: [
       {
         path: '/dashboard',
@@ -43,6 +44,7 @@ export const constantRoutes = [
     redirect: '/member/blacklist',
     alwaysShow: true, // will always show the root menu
     name: '用户管理',
+    icon: 'House',
     meta: {
       title: 'member',
       icon: 'lock'
