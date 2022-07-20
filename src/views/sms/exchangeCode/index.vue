@@ -1,6 +1,6 @@
 <template>
   <div class="parent">
-    <div class="child">storeSet</div>
+    <div class="child">exchangeCode</div>
   </div>
 </template>
 

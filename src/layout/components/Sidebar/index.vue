@@ -3,7 +3,7 @@
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
-        v-if="permission_routes.length > 0"
+        v-if="permission_menus.length > 0"
         mode="vertical"
         :default-active="activeMenu"
         :background-color="variables.menuBg"

@@ -1,6 +1,6 @@
 <template>
   <div class="parent">
-    <div class="child">blackList</div>
+    <div class="child">supplierSet</div>
   </div>
 </template>
 

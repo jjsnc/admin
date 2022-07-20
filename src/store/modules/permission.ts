@@ -6,7 +6,7 @@ let state = {
 }
 const mutations = {
   SET_MENUS: (state: any, permission_menus: any) => {
-    state.permission_menus = permission_menus.concat(permission_menus)
+    state.permission_menus = permission_menus
   }
 }
 
