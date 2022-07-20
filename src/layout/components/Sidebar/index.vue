@@ -78,7 +78,7 @@ export default defineComponent({
   methods: {
     handlePermissionMenus() {
       let { permission_menus } = this
-      if (permission_menus.length < 0) {
+      if (permission_menus.length > 0) {
         return
       } else {
         store.dispatch('permission/generateMenus', JSON.parse(getMenus()))

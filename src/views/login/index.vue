@@ -65,9 +65,7 @@ import { defineComponent } from 'vue'
 import type { TabsPaneContext } from 'element-plus'
 import { httpCode, httpLogin } from '@/api/user'
 import store from '@/store'
-import router from '@/router'
-import { setRoutes } from '@/utils/auth'
-import Layout from '@/layout/index.vue'
+
 export default defineComponent({
   data() {
     return {
@@ -114,37 +112,13 @@ export default defineComponent({
       this.$router.push({ path: '/' })
     },
     async handleMenus(permissions: any) {
-      const accessRoutes = await store.dispatch('permission/generateMenus', permissions[0].menuVo)
-      router.addRoute(accessRoutes)
+      store.dispatch('permission/generateMenus', permissions[0].menuVo)
     },
     async handleUser(user: any) {
       store.dispatch('user/setUser', user)
     },
     async handleToken(token: any) {
       store.dispatch('user/setToken', token)
-    },
-    filterAsyncRoutes(routes) {
-      const res = []
-      routes.forEach((route) => {
-        if (route.type === 1) {
-          if (route.children.length > 0 && route.children[0].type === 1) {
-            var tmp = { ...route, component: Layout }
-          } else {
-            /* @vite-ignore */
-            var tmp = {
-              ...route,
-              a: '111',
-              component: () => import(`../../views${route.path}/index.vue`)
-            }
-          }
-          if (tmp.children) {
-            tmp.children = this.filterAsyncRoutes(tmp.children)
-          }
-          res.push(tmp)
-        }
-      })
-
-      return res
     }
   }
 })

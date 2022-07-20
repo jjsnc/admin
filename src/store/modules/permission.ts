@@ -1,6 +1,17 @@
 // @ts-nocheck
 import { constantRoutes } from '@/router'
 import { setMenus } from '@/utils/auth'
+let MenuIcon = {
+  用户管理: 'UserFilled',
+  商户: 'Management',
+  商品: 'GoodsFilled',
+  订单: 'TrendCharts',
+  营销: 'Promotion',
+  运营: 'HelpFilled',
+  目的地攻略: 'LocationFilled',
+  公众号: 'StarFilled',
+  设置: 'Tools'
+}
 let state = {
   permission_menus: []
 }
@@ -14,7 +25,7 @@ export function filterAsyncMenus(routes) {
   const res = []
   routes.forEach((route) => {
     if (route.type === 1) {
-      const tmp = { ...route }
+      const tmp = { ...route, icon: MenuIcon[route.name] }
       if (tmp.children) {
         tmp.children = filterAsyncMenus(tmp.children)
       }
