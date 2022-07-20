@@ -16,7 +16,7 @@
         v-for="option in options"
         :key="option.refIndex"
         :value="option.item"
-        :label="option.item.title.join('>')"
+        :label="option.item.name.join('>')"
       />
     </el-select>
   </div>
@@ -26,14 +26,12 @@
 // @ts-nocheck
 import Fuse from 'fuse.js'
 import { defineComponent } from 'vue'
-import { getRoutes } from '@/utils/auth'
 export default defineComponent({
   data() {
     return {
       search: '',
       options: [],
       searchPool: [],
-      routes: [],
       show: false,
       fuse: undefined
     }
@@ -43,6 +41,7 @@ export default defineComponent({
       return this.$store.getters.permission_menus
     }
   },
+
   watch: {
     menus() {
       this.searchPool = this.generateMenus(this.menus)
@@ -91,7 +90,7 @@ export default defineComponent({
         minMatchCharLength: 1,
         keys: [
           {
-            name: 'title',
+            name: 'name',
             weight: 0.7
           },
           {

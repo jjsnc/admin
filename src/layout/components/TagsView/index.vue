@@ -10,7 +10,7 @@
         class="tags-view-item"
         :class="isActive(tag) ? 'active' : ''"
       >
-        {{ tag.title }}
+        {{ tag.name }}
 
         <el-icon v-if="!isAffix(tag)" @click.prevent.stop="closeSelectedTag(tag)"
           ><Close
