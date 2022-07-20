@@ -11,14 +11,13 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/home',
     icon: 'House',
     children: [
       {
-        path: '/dashboard',
-        component: () => import('../views/dashboard/index.vue'),
-        name: 'Dashboard',
-        meta: { transition: 'slide-right', title: 'Dashboard', icon: 'House', affix: true }
+        path: '/home',
+        component: () => import('../views/home/index.vue'),
+        name: '首页'
       }
     ]
   },
@@ -101,42 +100,57 @@ export const constantRoutes = [
   {
     path: '/goods',
     component: Layout,
-    redirect: '/goods/hotel',
+    redirect: '/goods/hotel/goods',
     alwaysShow: true, // will always show the root menu
     name: '商品',
     children: [
       {
-        path: '/goods/hotel/goods/goodsHotel',
-        component: () => import('@/views/goods/hotel/goodsHotel/index.vue'),
-        name: '酒店商品'
+        path: '/goods/hotel/goods',
+        redirect: '/goods/hotel/goods/goodsHotel',
+        name: '酒店',
+        children: [
+          {
+            path: '/goods/hotel/goods/goodsHotel',
+            component: () => import('@/views/goods/hotel/goodsHotel/index.vue'),
+            name: '酒店商品'
+          },
+          {
+            path: '/goods/hotel/goods/package',
+            component: () => import('@/views/goods/hotel/package/index.vue'),
+            name: '酒店套餐',
+            meta: {
+              title: 'Directive Permission'
+              // if do not set roles, means: this page does not require permission
+            }
+          }
+        ]
       },
       {
-        path: '/goods/hotel/goods/package',
-        component: () => import('@/views/goods/hotel/package/index.vue'),
-        name: '酒店套餐',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
-        }
+        path: '/goods/travel',
+        name: '旅游',
+        redirect: '/goods/travel/travelLine/goods/package',
+        children: [
+          {
+            path: '/goods/travel/travelLine/goods/package',
+            component: () => import('@/views/goods/travel/travelLine/index.vue'),
+            name: '旅游线路',
+            meta: {
+              title: 'Directive Permission'
+              // if do not set roles, means: this page does not require permission
+            }
+          },
+          {
+            path: '/goods/travel/ticket/goods/package',
+            component: () => import('@/views/goods/travel/ticket/index.vue'),
+            name: '门票',
+            meta: {
+              title: 'Directive Permission'
+              // if do not set roles, means: this page does not require permission
+            }
+          }
+        ]
       },
-      {
-        path: '/goods/travel/travelLine/goods/package',
-        component: () => import('@/views/goods/travel/travelLine/index.vue'),
-        name: '旅游线路',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
-      {
-        path: '/goods/travel/ticket/goods/package',
-        component: () => import('@/views/goods/travel/ticket/index.vue'),
-        name: '门票',
-        meta: {
-          title: 'Directive Permission'
-          // if do not set roles, means: this page does not require permission
-        }
-      },
+
       {
         path: '/goods/goodsList/goodsTag',
         component: () => import('@/views/goods/goodsTag/index.vue'),

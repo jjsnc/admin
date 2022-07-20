@@ -1,7 +1,7 @@
 
 <template>
   <div class="parent">
-    <div class="child">dashboard</div>
+    <div class="child">首页</div>
   </div>
 </template>
 
