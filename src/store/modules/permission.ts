@@ -1,30 +1,22 @@
 // @ts-nocheck
-import { setRoutes } from '@/utils/auth'
-import Layout from '@/layout/index.vue'
+import { constantRoutes } from '@/router'
+import { setMenus } from '@/utils/auth'
 let state = {
-  routes: [],
-  addRoutes: []
+  permission_menus: []
 }
 const mutations = {
-  SET_ROUTES: (state: any, routes: any) => {
-    state.addRoutes = routes
-    setRoutes(JSON.stringify(routes))
-    state.routes = routes
+  SET_MENUS: (state: any, permission_menus: any) => {
+    state.permission_menus = permission_menus.concat(permission_menus)
   }
 }
 
-export function filterAsyncRoutes(routes) {
+export function filterAsyncMenus(routes) {
   const res = []
   routes.forEach((route) => {
-    tmp = {}
     if (route.type === 1) {
-      if (route.children.length > 0) {
-        tmp = { ...route, component: Layout }
-      } else {
-        tmp = { ...route }
-      }
+      const tmp = { ...route }
       if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children)
+        tmp.children = filterAsyncMenus(tmp.children)
       }
       res.push(tmp)
     }
@@ -35,13 +27,12 @@ export function filterAsyncRoutes(routes) {
 
 const actions = {
   // @ts-ignore
-  generateRoutes({ commit }, permissions) {
+  generateMenus({ commit }, permission_menus) {
     return new Promise((resolve) => {
-      let accessedRoutes = filterAsyncRoutes(permissions)
-      accessedRoutes = accessedRoutes
-
-      commit('SET_ROUTES', accessedRoutes)
-      resolve(accessedRoutes)
+      let accessedMenus = filterAsyncMenus(permission_menus)
+      setMenus(JSON.stringify(accessedMenus))
+      commit('SET_MENUS', accessedMenus)
+      resolve(accessedMenus)
     })
   }
 }

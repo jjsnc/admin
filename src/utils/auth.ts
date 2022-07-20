@@ -1,5 +1,5 @@
 const TokenKey = 'admin-token'
-const Routes = 'admin-routes'
+const PermissionMenus = 'permission_menus'
 
 export function getToken() {
   return localStorage.getItem(TokenKey)
@@ -13,10 +13,10 @@ export function removeToken() {
   return localStorage.removeItem(TokenKey)
 }
 
-export function setRoutes(setRoutes: any) {
-  return localStorage.setItem(Routes, setRoutes)
+export function getMenus() {
+  return localStorage.getItem(PermissionMenus)
 }
 
-export function getRoutes() {
-  return localStorage.getItem(Routes)
+export function setMenus(Menus: any) {
+  return localStorage.setItem(PermissionMenus, Menus)
 }
